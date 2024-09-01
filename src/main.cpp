@@ -5,6 +5,7 @@
 
 Remote remote_data;
 PID pid_data;
+Battery battery;
 
 // Received Data
 float min_bat_v;
@@ -15,6 +16,7 @@ float roll;
 void setup()
 {
   Serial.begin(115200);
+  Serial.println("setup");
 
   setup_wifi();
   setup_remote();
@@ -22,8 +24,10 @@ void setup()
   pid_data = {0.05, 0.0, 0.01}; // 0.06, 0, 0.02
 }
 
+float i = 0;
 void loop()
 {
+  i += 0.1;
   read_remote();
 
   // Set Onboard LED
@@ -31,16 +35,11 @@ void loop()
 
   send_data(pid_data);
 
-  Serial.print(remote_data.left_button);
-  Serial.print("\t");
-  Serial.print(remote_data.right_button);
-  Serial.print("\t");
-  Serial.print(remote_data.left.x);
-  Serial.print("\t");
-  Serial.print(remote_data.left.y);
-  Serial.print("\t");
-  Serial.print(remote_data.right.x);
-  Serial.print("\t");
-  Serial.print(remote_data.right.y);
-  Serial.println();
+  // Print log
+  Serial.print("loop");
+  Serial.println(i);
+
+  // Plot a sinus
+  Serial.print(">lowBat:");
+  Serial.println(battery.lowestBat);
 }

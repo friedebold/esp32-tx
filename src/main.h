@@ -37,10 +37,19 @@ struct Correction
     PID yaw;
 };
 
+struct Battery
+{
+    float lowestBat;
+    float vBat1;
+    float vBat2;
+    float vBat3;
+};
+
 extern float min_bat_v;
 extern float bat_c;
 extern Thrust thrust;
 extern float roll;
 extern Remote remote_data;
+extern Battery battery;
 
 #endif

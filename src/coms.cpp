@@ -8,6 +8,11 @@
 uint8_t broadcastAddress[] = {0xE4, 0x65, 0xB8, 0x12, 0x9C, 0x2C};
 esp_now_peer_info_t peerInfo;
 
+void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len)
+{
+    memcpy(&battery, incomingData, sizeof(battery));
+}
+
 void setup_wifi()
 {
     WiFi.mode(WIFI_STA);
@@ -18,6 +23,7 @@ void setup_wifi()
         Serial.println("Error initializing ESP-NOW");
         return;
     }
+    esp_now_register_recv_cb(OnDataRecv);
     // Register peer
     memcpy(peerInfo.peer_addr, broadcastAddress, 6);
     peerInfo.channel = 0;
@@ -37,16 +43,7 @@ struct SendData
 };
 
 void send_data(PID pid_data)
-
 {
     SendData send_data = {remote_data, pid_data};
     esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *)&send_data, sizeof(send_data));
-    if (result == ESP_OK)
-    {
-        // Serial.println("✅ Sent success");
-    }
-    else
-    {
-        //  Serial.println("❌ Sent failed");
-    }
 };
