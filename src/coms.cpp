@@ -5,12 +5,28 @@
 #include <esp_now.h>
 #include <WiFi.h>
 
-uint8_t broadcastAddress[] = {0xE4, 0x65, 0xB8, 0x12, 0x9C, 0x2C};
+uint8_t broadcastAddress[] = {0xA0, 0xA3, 0xB3, 0xAA, 0x6C, 0xA8};
+
 esp_now_peer_info_t peerInfo;
+
+struct SendData
+{
+    Remote remote_data;
+    PID pid_data;
+};
+
+struct ReceivedData
+{
+    Battery battery;
+    IMU imu;
+};
 
 void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len)
 {
-    memcpy(&battery, incomingData, sizeof(battery));
+    ReceivedData receivedData;
+    memcpy(&receivedData, incomingData, sizeof(receivedData));
+    battery = receivedData.battery;
+    imu = receivedData.imu;
 }
 
 void setup_wifi()
@@ -34,12 +50,6 @@ void setup_wifi()
         Serial.println("Failed to add peer");
         return;
     }
-};
-
-struct SendData
-{
-    Remote remote_data;
-    PID pid_data;
 };
 
 void send_data(PID pid_data)

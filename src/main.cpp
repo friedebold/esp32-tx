@@ -6,12 +6,7 @@
 Remote remote_data;
 PID pid_data;
 Battery battery;
-
-// Received Data
-float min_bat_v;
-float bat_c;
-Thrust thrust;
-float roll;
+IMU imu;
 
 void setup()
 {
@@ -40,6 +35,10 @@ void loop()
   Serial.println(i);
 
   // Plot a sinus
-  Serial.print(">lowBat:");
-  Serial.println(battery.lowestBat);
+  Serial.print(">vBat1:");
+  Serial.println(battery.vBat1);
+  Serial.print(">vBat2:");
+  Serial.println(battery.vBat2);
+  Serial.print(">vBat3:");
+  Serial.println(battery.vBat3);
 }

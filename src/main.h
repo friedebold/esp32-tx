@@ -17,12 +17,6 @@ struct Remote
     bool right_button;
 };
 
-struct Thrust
-{
-    float left;
-    float right;
-};
-
 struct PID
 {
     float p;
@@ -30,16 +24,17 @@ struct PID
     float d;
 };
 
-struct Correction
+struct IMU
 {
-    PID pitch;
-    PID roll;
-    PID yaw;
+    float pitch;
+    float roll;
+    float yaw;
 };
 
 struct Battery
 {
     float lowestBat;
+    float cBat;
     float vBat1;
     float vBat2;
     float vBat3;
@@ -47,9 +42,9 @@ struct Battery
 
 extern float min_bat_v;
 extern float bat_c;
-extern Thrust thrust;
 extern float roll;
 extern Remote remote_data;
 extern Battery battery;
+extern IMU imu;
 
 #endif
