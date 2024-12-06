@@ -15,18 +15,9 @@ struct SendData
     PID pid_data;
 };
 
-struct ReceivedData
-{
-    Battery battery;
-    IMU imu;
-};
-
 void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len)
 {
-    ReceivedData receivedData;
-    memcpy(&receivedData, incomingData, sizeof(receivedData));
-    battery = receivedData.battery;
-    imu = receivedData.imu;
+    memcpy(&incoming, incomingData, sizeof(incoming));
 }
 
 void setup_wifi()

@@ -40,11 +40,26 @@ struct Battery
     float vBat3;
 };
 
+struct Thrust
+{
+    float left;
+    float right;
+    float front;
+    float back;
+};
+
+struct IncomingData
+{
+    Battery battery;
+    IMU imu;
+    float global_thrust;
+    Thrust thrust;
+};
+
 extern float min_bat_v;
 extern float bat_c;
 extern float roll;
 extern Remote remote_data;
-extern Battery battery;
-extern IMU imu;
+extern IncomingData incoming;
 
 #endif

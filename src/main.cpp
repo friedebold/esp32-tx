@@ -5,8 +5,7 @@
 
 Remote remote_data;
 PID pid_data;
-Battery battery;
-IMU imu;
+IncomingData incoming;
 
 void setup()
 {
@@ -35,10 +34,24 @@ void loop()
   Serial.println(i);
 
   // Plot a sinus
-  Serial.print(">vBat1:");
-  Serial.println(battery.vBat1);
-  Serial.print(">vBat2:");
-  Serial.println(battery.vBat2);
-  Serial.print(">vBat3:");
-  Serial.println(battery.vBat3);
+  Serial.print(">pitch:");
+  Serial.println(incoming.imu.pitch);
+  Serial.print(">roll:");
+  Serial.println(incoming.imu.roll);
+  Serial.print(">yaw:");
+  Serial.println(incoming.imu.yaw);
+  Serial.print(">cBat:");
+  Serial.println(incoming.battery.cBat);
+  Serial.print(">lowestBat:");
+  Serial.println(incoming.battery.lowestBat);
+  Serial.print(">gThrust:");
+  Serial.println(incoming.global_thrust);
+  Serial.print(">left:");
+  Serial.println(incoming.thrust.left);
+  Serial.print(">right:");
+  Serial.println(incoming.thrust.right);
+  Serial.print(">front:");
+  Serial.println(incoming.thrust.front);
+  Serial.print(">back:");
+  Serial.println(incoming.thrust.back);
 }

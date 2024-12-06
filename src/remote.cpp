@@ -65,7 +65,7 @@ void read_remote()
     prev_left_btn_val = left_btn_val;
     prev_right_btn_val = right_btn_val;
 
-        // LEFT X-Axis
+    // LEFT X-Axis
     int l_x_v = analogRead(L_VRX_PIN);
     float l_x = -(l_x_v / 4095.0 - 0.445);
     l_x = calibrate_joystick_axis(l_x, 2.245, 1.81);
